@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const ejs = require('ejs')
 
+// MVC Pattern
 const {
   displayLandingPage,
   getUsersData,
@@ -32,17 +33,37 @@ app.post('/users/signup', signupUser)
 app.post('/users/login', loginUser)
 
 /* ------------- */
+// EJS Templates
 app.get('/users/debasmita', (req, res) => {
   res.render('user', {
     firstName: 'Debasmita',
-    lastName: 'Mohanty'
+    lastName: 'Mohanty',
+    avatar: 'https://reqres.in/img/faces/2-image.jpg',
+    email: 'debasmita@gmail.com',
+    isPremium: true,
+    skills: ['HTML', 'CSS']
   })
 })
 
 app.get('/users/pankaj', (req, res) => {
   res.render('user', {
     firstName: 'Pankaj',
-    lastName: 'Singh'
+    lastName: 'Singh',
+    avatar: 'https://reqres.in/img/faces/1-image.jpg',
+    email: 'pankaj@gmail.com',
+    isPremium: false,
+    skills: ['JavaScript', 'React.js', 'Node.js']
+  })
+})
+
+app.get('/users/gaurav', (req, res) => {
+  res.render('user', {
+    firstName: 'Gaurav',
+    lastName: 'Tiwari',
+    avatar: 'https://reqres.in/img/faces/4-image.jpg',
+    email: 'gaurav@gmail.com',
+    isPremium: true,
+    skills: ['CSS', 'JavaScript', 'Node.js', 'Python', 'Java']
   })
 })
 
@@ -69,7 +90,7 @@ app.listen(3000, () => {
   # Node.js MVC (Model View Controller) Pattern **
     - Model: Related to the data lying in the DB (Until we learn DB, we are going to use dummy JSON arrays)
     - View: User interface (HTML/template) that is visible to the user
-    - Controller: a.k.a 'Handler' - Core entity esponsible for processing the incoming request
+    - Controller: a.k.a 'Handler' - Core entity responsible for processing the incoming request (logic)
 
     - Parent folder 'src': Source
       - models
@@ -92,8 +113,10 @@ app.listen(3000, () => {
         - Use ejs syntaxes wherever applicable
       - Use res.render method in the server file to return these templates
     - Syntaxes:
-      - Use variable
+      - Access variable value
         - <%= firstName %>
+      - JS Expression
+        - <% expression %>
 
   # Resources
     - https://media.geeksforgeeks.org/wp-content/uploads/mvc-block-diagram.png

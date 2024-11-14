@@ -19,16 +19,37 @@
       border-radius: 5px;
     }
 
+    .premium {
+      background-color: rgba(210, 175, 38, 0.4);
+      color: goldenrod;
+      border: 1px solid goldenrod;
+      border-radius: 5px;
+    }
+
     img {
       border-radius: 50%;
+    }
+
+    .skills-list {
+      padding: 0;
+      list-style: none;
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <% if(isPremium) { %>
+      <div class="premium">👑 Premium</div>
+    <% } %>
     <h1><%= firstName %> <%= lastName %></h1>
-    <img src="https://reqres.in/img/faces/2-image.jpg">
-    <p>debasmita@gmail.com</p>
+    <img src="<%= avatar %>">
+    <p><%= email %></p>
+    <h4>Skills</h4>
+    <ul class="skills-list">
+      <% skills.forEach(skill => { %>
+        <li><%= skill %></li>
+      <% }) %>
+    </ul>
   </div>
 </body>
 </html>

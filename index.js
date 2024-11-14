@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const ejs = require('ejs')
+const expressLayouts = require('express-ejs-layouts');
 
 // MVC Pattern
 const {
@@ -16,54 +17,77 @@ const {
 const app = express()
 app.use(bodyParser.urlencoded())
 app.use(express.static('public'))
+app.use(expressLayouts)
 app.set('view engine', 'ejs')
+app.set('layout', 'layouts/main')
 
-app.get('/', displayLandingPage)
+// app.get('/', displayLandingPage)
 
-app.get('/users', getUsersData)
+// app.get('/users', getUsersData)
 
-app.get('/signup', displaySignupPage)
+// app.get('/signup', displaySignupPage)
 
-app.get('/login', displayLoginPage)
+// app.get('/login', displayLoginPage)
 
-app.get('/dashboard', displayDashboardPage)
+// app.get('/dashboard', displayDashboardPage)
 
-app.post('/users/signup', signupUser)
+// app.post('/users/signup', signupUser)
 
-app.post('/users/login', loginUser)
+// app.post('/users/login', loginUser)
 
 /* ------------- */
 // EJS Templates
-app.get('/users/debasmita', (req, res) => {
-  res.render('user', {
-    firstName: 'Debasmita',
-    lastName: 'Mohanty',
-    avatar: 'https://reqres.in/img/faces/2-image.jpg',
-    email: 'debasmita@gmail.com',
-    isPremium: true,
-    skills: ['HTML', 'CSS']
+// app.get('/users/debasmita', (req, res) => {
+//   res.render('user', {
+//     firstName: 'Debasmita',
+//     lastName: 'Mohanty',
+//     avatar: 'https://reqres.in/img/faces/2-image.jpg',
+//     email: 'debasmita@gmail.com',
+//     isPremium: true,
+//     skills: ['HTML', 'CSS']
+//   })
+// })
+
+// app.get('/users/pankaj', (req, res) => {
+//   res.render('user', {
+//     firstName: 'Pankaj',
+//     lastName: 'Singh',
+//     avatar: 'https://reqres.in/img/faces/1-image.jpg',
+//     email: 'pankaj@gmail.com',
+//     isPremium: false,
+//     skills: ['JavaScript', 'React.js', 'Node.js']
+//   })
+// })
+
+// app.get('/users/gaurav', (req, res) => {
+//   res.render('user', {
+//     firstName: 'Gaurav',
+//     lastName: 'Tiwari',
+//     avatar: 'https://reqres.in/img/faces/4-image.jpg',
+//     email: 'gaurav@gmail.com',
+//     isPremium: true,
+//     skills: ['CSS', 'JavaScript', 'Node.js', 'Python', 'Java']
+//   })
+// })
+
+/* ------------- */
+// Express EJS Layouts
+
+app.get('/', (req, res) => {
+  res.render('home', {
+    title: 'Home'
   })
 })
 
-app.get('/users/pankaj', (req, res) => {
-  res.render('user', {
-    firstName: 'Pankaj',
-    lastName: 'Singh',
-    avatar: 'https://reqres.in/img/faces/1-image.jpg',
-    email: 'pankaj@gmail.com',
-    isPremium: false,
-    skills: ['JavaScript', 'React.js', 'Node.js']
+app.get('/contact', (req, res) => {
+  res.render('contact', {
+    title: 'Contact'
   })
 })
 
-app.get('/users/gaurav', (req, res) => {
-  res.render('user', {
-    firstName: 'Gaurav',
-    lastName: 'Tiwari',
-    avatar: 'https://reqres.in/img/faces/4-image.jpg',
-    email: 'gaurav@gmail.com',
-    isPremium: true,
-    skills: ['CSS', 'JavaScript', 'Node.js', 'Python', 'Java']
+app.get('/about', (req, res) => {
+  res.render('about', {
+    title: 'About'
   })
 })
 
@@ -118,7 +142,15 @@ app.listen(3000, () => {
       - JS Expression
         - <% expression %>
 
+  # Express EJS Layouts
+    - Create a custom layout file
+    - Set layout using app.set method
+    - Create individual ejs files for respective content body
+    - Apply the placeholder in main layout file to use the layout
+      - Syntax: <%- body %>
+
   # Resources
     - https://media.geeksforgeeks.org/wp-content/uploads/mvc-block-diagram.png
     - https://ejs.co/
+    - https://www.npmjs.com/package/express-ejs-layouts
 */
